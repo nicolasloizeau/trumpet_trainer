@@ -1,0 +1,146 @@
+css/styles.css#L1-80
+/* Basic centered layout */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* center horizontally */
+    justify-content: flex-start; /* keep content from perfectly vertical-centering by default */
+    min-height: 100vh;
+    padding: 32px;
+    background: #313131; /* dark page background */
+    color: #e6eef8; /* light text for contrast */
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+canvas {
+    background-color: #ffffff !important;
+}
+
+/* Constrain header/content width so lines are readable */
+header {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Make the toggle button look a bit cleaner in the centered layout */
+button,
+.btn,
+input[type="button"],
+input[type="submit"] {
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: white;
+    color: #000 !important;
+    cursor: pointer;
+    font: inherit; /* inherit font-family/size from body */
+    color: inherit;
+}
+
+canvas[id^="score"],
+canvas.score-canvas {
+    background: #ffffff; /* visible background color */
+    border-radius: 12px; /* rounded corners */
+    /*border: 1px solid rgba(0, 0, 0, 0.14);*/
+    overflow: hidden;
+    background-clip: padding-box;
+    display: block;
+    margin: 12px auto;
+    box-shadow:
+        0 10px 30px rgba(2, 6, 23, 0.1),
+        0 2px 6px rgba(2, 6, 23, 0.06);
+}
+
+/* reduce shadow on small screens for a lighter mobile feel */
+@media (max-width: 600px) {
+    canvas[id^="score"],
+    canvas.score-canvas {
+        box-shadow: 0 6px 16px rgba(2, 6, 23, 0.08);
+    }
+}
+
+.scales-container {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px; /* space between buttons */
+    flex-wrap: wrap; /* wrap onto multiple lines on small screens */
+    justify-content: center;
+}
+
+.scale-btn {
+    white-space: nowrap; /* prevent label wrapping */
+}
+
+button,
+.btn,
+input[type="button"],
+input[type="submit"] {
+    box-shadow: 0 2px 6px rgba(2, 6, 23, 0.08);
+    transition: box-shadow 150ms ease;
+}
+button:hover,
+.btn:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
+}
+
+canvas {
+    border-radius: 12px; /* rounded corners */
+}
+
+.btn.active {
+    background-color: #ffd54f; /* highlight color */
+    color: #000 !important;
+    border-color: #e6c200;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.duration-control {
+    display: flex;
+    align-items: center; /* vertically center label with the input/button line */
+    gap: 6px;
+}
+
+/* make the input visually match the buttons */
+.input-btn {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: white; /* same as buttons' background */
+    color: #000 !important; /* match button text color */
+    font: inherit;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    width: 56px;
+    text-align: center;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* subtle focus ring consistent with buttons */
+.input-btn:focus {
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.65),
+        0 0 0 3px rgba(255, 213, 79, 0.12);
+}
+
+/* small tweak to label spacing and baseline so it appears centered */
+.duration-label {
+    margin: 0;
+    line-height: 1;
+    display: inline-block;
+    transform: translateY(1px); /* nudge to better align with button baseline */
+}

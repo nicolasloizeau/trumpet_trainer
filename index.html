@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Trumpet fingering</title>
+        <script src="dist/bundle.js" defer></script>
+        <link rel="stylesheet" href="css/styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    </head>
+    <body>
+        <div id="controls" style="display: flex; gap: 8px; align-items: center">
+            <button id="play">Play</button>
+
+            <div class="duration-control">
+                <label for="note-duration" class="duration-label"
+                    >Duration (s):</label
+                >
+                <input
+                    id="note-duration"
+                    class="input-btn"
+                    type="text"
+                    value="5"
+                />
+            </div>
+
+            <button id="toggle-pattern">Hide pattern</button>
+            <button id="mode-toggle">Mode: Melody</button>
+        </div>
+        <div id="scales-container" class="scales-container"></div>
+        <div id="keys-container" class="keys-container"></div>
+        <br />
+        <br />
+        <div style="display: flex; gap: 12px; align-items: center">
+            <canvas id="status"></canvas>
+            <canvas id="pattern"></canvas>
+            <canvas id="pattern2"></canvas>
+        </div>
+    </body>
+</html>

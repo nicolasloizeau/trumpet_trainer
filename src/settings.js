@@ -1,0 +1,9 @@
+window.score = {};
+export const staff_offset = -24;
+export const upper_lines = 2;
+export const lower_lines = 3;
+export const total_lines = upper_lines + lower_lines + 5;
+export const dy = 20;
+export const dx = 40;
+export const height = total_lines * dy;
+export const patterns_height = 200;
