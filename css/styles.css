@@ -144,3 +144,37 @@ canvas {
     display: inline-block;
     transform: translateY(1px); /* nudge to better align with button baseline */
 }
+
+/* Mobile adjustments: scale controls and canvases on small screens */
+@media (max-width: 600px) {
+    #controls {
+        gap: 10px;
+        padding: 6px;
+    }
+
+    /* bigger tappable buttons */
+    #controls button,
+    .input-btn {
+        padding: 12px 14px;
+        font-size: 18px;
+        border-radius: 10px;
+    }
+
+    /* make canvases visually larger on phones */
+    #status,
+    #pattern,
+    #pattern2 {
+        width: 140px;
+        height: 140px;
+        margin: 8px;
+    }
+
+    /* stack canvases if screen is very narrow */
+    @supports (display: flex) {
+        .canvas-row, /* if you have a wrapper class */
+    body > div[style*="display: flex"] {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+}

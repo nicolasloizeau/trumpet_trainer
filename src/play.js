@@ -145,3 +145,30 @@ export function stopWhiteNoise() {
     _noiseGain = null;
   }
 }
+
+export function resizeCanvases() {
+  const dpr = window.devicePixelRatio || 1;
+  const setSize = (id, cssW, cssH) => {
+    const c = document.getElementById(id);
+    if (!c) return;
+    // If caller passed cssW/cssH as null, derive from computed style
+    if (cssW == null || cssH == null) {
+      const style = getComputedStyle(c);
+      cssW = parseFloat(style.width) || c.clientWidth || 100;
+      cssH = parseFloat(style.height) || c.clientHeight || 100;
+    }
+    c.style.width = cssW + "px";
+    c.style.height = cssH + "px";
+    c.width = Math.round(cssW * dpr);
+    c.height = Math.round(cssH * dpr);
+    const ctx = c.getContext("2d");
+    if (ctx && ctx.setTransform) {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+  };
+
+  // Typical sizes (these will be overridden by CSS media query on mobile)
+  setSize("status", null, null);
+  setSize("pattern", null, null);
+  setSize("pattern2", null, null);
+}

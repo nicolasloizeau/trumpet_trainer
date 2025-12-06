@@ -3058,24 +3058,38 @@ const patterns_height = 200;
 const r = 20;
 
 function draw_pattern(note, canvas) {
+  if (!canvas) return;
   if (typeof note === "string") {
     note = sharp_simplify(note);
     note = fingerings[note];
   }
   const pattern = note;
   const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (var i = 0; i < 3; i++) {
+
+  // Compute drawing dimensions in CSS pixels (independent of devicePixelRatio)
+  const W =
+    canvas.clientWidth ||
+    parseFloat(getComputedStyle(canvas).width) ||
+    canvas.width;
+  const H =
+    canvas.clientHeight ||
+    parseFloat(getComputedStyle(canvas).height) ||
+    canvas.height;
+
+  // Clear the drawing area (in CSS pixels)
+  ctx.clearRect(0, 0, W, H);
+
+  // Radius scaled to canvas size for consistent appearance
+  const r = Math.max(4, Math.min(12, Math.round(Math.min(W, H) * 0.2)));
+
+  for (let i = 0; i < 3; i++) {
     ctx.beginPath();
-    const cx = canvas.width / 2;
-    const cy = patterns_height - (patterns_height / 4) * (i + 1);
+    const cx = W / 2;
+    const cy = H - (H / 4) * (i + 1);
     ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = "white";
-    if (pattern[i] == 1) {
-      ctx.fillStyle = "black";
-    }
+    ctx.fillStyle = pattern && pattern[i] == 1 ? "black" : "white";
     ctx.fill();
-    ctx.lineWidth = 4;
+    ctx.lineWidth = Math.max(2, Math.round(r * 0.4));
     ctx.strokeStyle = "black";
     ctx.stroke();
   }
@@ -33931,6 +33945,33 @@ function stopWhiteNoise() {
   }
 }
 
+function resizeCanvases() {
+  const dpr = window.devicePixelRatio || 1;
+  const setSize = (id, cssW, cssH) => {
+    const c = document.getElementById(id);
+    if (!c) return;
+    // If caller passed cssW/cssH as null, derive from computed style
+    if (cssW == null || cssH == null) {
+      const style = getComputedStyle(c);
+      cssW = parseFloat(style.width) || c.clientWidth || 100;
+      cssH = parseFloat(style.height) || c.clientHeight || 100;
+    }
+    c.style.width = cssW + "px";
+    c.style.height = cssH + "px";
+    c.width = Math.round(cssW * dpr);
+    c.height = Math.round(cssH * dpr);
+    const ctx = c.getContext("2d");
+    if (ctx && ctx.setTransform) {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+  };
+
+  // Typical sizes (these will be overridden by CSS media query on mobile)
+  setSize("status", null, null);
+  setSize("pattern", null, null);
+  setSize("pattern2", null, null);
+}
+
 ;// ./src/index.js
 
 
@@ -34150,6 +34191,14 @@ setupModeButton();
 setupButton();
 setupTogglePatternButton();
 drawSquare(true);
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // existing setup...
+  resizeCanvases();
+  window.addEventListener("resize", () => resizeCanvases());
+});
 
 })();
 

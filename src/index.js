@@ -216,3 +216,11 @@ setupModeButton();
 setupButton();
 setupTogglePatternButton();
 drawSquare(true);
+
+import { resizeCanvases } from "./play.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  // existing setup...
+  resizeCanvases();
+  window.addEventListener("resize", () => resizeCanvases());
+});
