@@ -22,8 +22,18 @@ function next_note() {
 }
 
 function getDurationInputValue() {
-  const input = document.getElementById("note-duration");
-  return parseFloat(input.value);
+  const checked = document.querySelector('input[name="note-duration"]:checked');
+  if (checked) {
+    const v = parseInt(checked.value, 10);
+    return Number.isFinite(v) && v >= 1 && v <= 5 ? v : 5;
+  }
+  // fallback for older numeric input
+  const old = document.getElementById("note-duration");
+  if (old && (old.tagName || "").toUpperCase() === "INPUT") {
+    const parsed = parseFloat(old.value);
+    if (Number.isFinite(parsed)) return parsed;
+  }
+  return 5;
 }
 
 function startLoop() {

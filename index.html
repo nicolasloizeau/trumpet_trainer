@@ -17,15 +17,48 @@
             <button id="play">Play</button>
 
             <div class="duration-control">
-                <label for="note-duration" class="duration-label"
-                    >Duration (s):</label
+                <span class="duration-label">Speed</span>
+                <div
+                    id="note-duration-radios"
+                    style="display: inline-flex; gap: 6px; align-items: center"
                 >
-                <input
-                    id="note-duration"
-                    class="input-btn"
-                    type="text"
-                    value="5"
-                />
+                    <label
+                        ><input
+                            type="radio"
+                            name="note-duration"
+                            value="1"
+                        />1</label
+                    >
+                    <label
+                        ><input
+                            type="radio"
+                            name="note-duration"
+                            value="2"
+                        />2</label
+                    >
+                    <label
+                        ><input
+                            type="radio"
+                            name="note-duration"
+                            value="3"
+                        />3</label
+                    >
+                    <label
+                        ><input
+                            type="radio"
+                            name="note-duration"
+                            value="4"
+                        />4</label
+                    >
+                    <label
+                        ><input
+                            type="radio"
+                            name="note-duration"
+                            value="5"
+                            checked
+                        />5</label
+                    >
+                </div>
             </div>
 
             <button id="toggle-pattern">Hide pattern</button>
