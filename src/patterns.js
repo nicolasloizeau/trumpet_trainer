@@ -1,7 +1,5 @@
 import { fingerings } from "./fingerings.js";
-import { get_canvas } from "./utils.js";
 import { Note } from "tonal";
-import { patterns_height } from "./settings.js";
 const r = 20;
 
 export function draw_pattern(note, canvas) {

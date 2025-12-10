@@ -1,31 +1,17 @@
-import { scales, createScaleButtons } from "./scales.js";
+import { scales, createScaleButtons, mirror } from "./scales.js";
 import { play_note, drawSquare, updateStatus, stopWhiteNoise } from "./play.js";
-import { Range, Interval } from "tonal";
+import { Range, Interval, Note } from "tonal";
 import { transpose_notes } from "./transposer.js";
 
 let mode = "melody"; // "random" or "melody"
-
 let keys = Range.chromatic(["C4", "B4"]);
-
-import { Note } from "tonal";
-
 keys = keys.map(Note.pitchClass);
-
 let head = 0;
-
-let melody = mirror(scales["major"]);
-
 window.key = "C4";
 window.scale_name = "major";
+let melody = mirror(scales[window.scale_name]);
 let intervalId = null;
 update();
-
-export function mirror(arr) {
-  if (!Array.isArray(arr) || arr.length <= 1)
-    return Array.isArray(arr) ? arr.slice() : [];
-  const tailReversed = arr.slice(0, -1).reverse();
-  return arr.concat(tailReversed);
-}
 
 function pickRandom() {
   return melody[Math.floor(Math.random() * melody.length)];
@@ -37,9 +23,7 @@ function next_note() {
 
 function getDurationInputValue() {
   const input = document.getElementById("note-duration");
-  if (!input) return 5;
-  const v = parseFloat(input.value);
-  return isNaN(v) || v <= 0 ? 5 : v;
+  return parseFloat(input.value);
 }
 
 function startLoop() {
@@ -56,7 +40,6 @@ function startLoop() {
     } else {
       n = pickRandom();
     }
-    console.log(n);
     window.current_note = n;
     play_note(n, durationSec);
     updateStatus();

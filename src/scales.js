@@ -1,5 +1,3 @@
-import { update } from "./editor.js";
-
 export const scales = {
   major: ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"],
   minor: ["C4", "D4", "Eb4", "F4", "G4", "Ab4", "Bb4", "C5"],
@@ -45,13 +43,4 @@ export function mirror(arr) {
     return Array.isArray(arr) ? arr.slice() : [];
   const tailReversed = arr.slice(0, -1).reverse();
   return arr.concat(tailReversed);
-}
-
-function update_score(score) {
-  score = mirror(score);
-  window.score = {};
-  for (let i = 0; i < score.length; i++) {
-    let note = score[i];
-    window.score[i + 3] = note;
-  }
 }

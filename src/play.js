@@ -48,7 +48,8 @@ export function drawSquare(isCorrect) {
   ctx.fillRect(0, 0, canvas_status.width, canvas_status.height);
 }
 
-const trumpet_keys = [39, 96, 110];
+// const trumpet_keys = [39, 96, 110];
+const trumpet_keys = [65, 66, 67];
 
 const pressedKeyChars = new Set();
 const pressedKeyCodes = new Set();

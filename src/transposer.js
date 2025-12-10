@@ -1,7 +1,7 @@
 import { Note, Interval } from "tonal";
-import { draw_score, note_to_iy } from "./score.js";
 import { total_lines } from "./settings.js";
 import { draw_patterns } from "./patterns.js";
+import { staff_offset } from "./settings.js";
 
 function transpose_score(score, interval) {
   let new_score = {};
@@ -11,6 +11,11 @@ function transpose_score(score, interval) {
     new_score[pos] = transposed_note;
   }
   return new_score;
+}
+
+export function note_to_iy(note) {
+  const info = Note.get(note);
+  return info.oct * 7 + info.step + staff_offset;
 }
 
 export function draw_transpose(score) {
