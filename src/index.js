@@ -13,6 +13,17 @@ let melody = mirror(scales[window.scale_name]);
 let intervalId = null;
 update();
 
+let wakeLock = null;
+
+async function keepScreenAwake() {
+  try {
+    wakeLock = await navigator.wakeLock.request("screen");
+    console.log("Wake lock active");
+  } catch (err) {
+    console.error(`${err.name}, ${err.message}`);
+  }
+}
+
 function pickRandom() {
   return melody[Math.floor(Math.random() * melody.length)];
 }
@@ -67,6 +78,7 @@ function setupButton() {
   const btn = document.getElementById("play");
   let running = false;
   btn.addEventListener("click", () => {
+    keepScreenAwake();
     if (!running) {
       startLoop();
       updateStatus();
