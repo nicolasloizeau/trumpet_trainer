@@ -20,6 +20,10 @@ export const scales = {
     "B4",
     "C5",
   ],
+  scale1: ["C4", "D4", "Eb4", "G4", "A4", "C5", "D5"],
+  scale2: ["Bb3", "C4", "Db4", "F4", "Gb4", "Bb4", "C5"],
+  arp1: ["C4", "E4", "G4", "B4", "D5"],
+  tfo: ["D4", "F4", "A4", "C5", "G4", "B4", "D5", "F5", "C4", "E4", "G4", "B4"],
 };
 
 export function createScaleButtons(container = document.body) {

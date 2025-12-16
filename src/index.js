@@ -34,17 +34,12 @@ function next_note() {
 
 function getDurationInputValue() {
   const checked = document.querySelector('input[name="note-duration"]:checked');
+  const durations = [1, 1.5, 2, 3, 4];
   if (checked) {
-    const v = parseInt(checked.value, 10);
+    const v = durations[parseInt(checked.value, 10)];
     return Number.isFinite(v) && v >= 1 && v <= 5 ? v : 5;
   }
-  // fallback for older numeric input
-  const old = document.getElementById("note-duration");
-  if (old && (old.tagName || "").toUpperCase() === "INPUT") {
-    const parsed = parseFloat(old.value);
-    if (Number.isFinite(parsed)) return parsed;
-  }
-  return 5;
+  return 4;
 }
 
 function startLoop() {

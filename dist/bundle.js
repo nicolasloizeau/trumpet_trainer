@@ -556,6 +556,10 @@ const scales = {
     "B4",
     "C5",
   ],
+  scale1: ["C4", "D4", "Eb4", "G4", "A4", "C5", "D5"],
+  scale2: ["Bb3", "C4", "Db4", "F4", "Gb4", "Bb4", "C5"],
+  arp1: ["C4", "E4", "G4", "B4", "D5"],
+  tfo: ["D4", "F4", "A4", "C5", "G4", "B4", "D5", "F5", "C4", "E4", "G4", "B4"],
 };
 
 function createScaleButtons(container = document.body) {
@@ -33773,17 +33777,12 @@ function next_note() {
 
 function getDurationInputValue() {
   const checked = document.querySelector('input[name="note-duration"]:checked');
+  const durations = [1, 1.5, 2, 3, 4];
   if (checked) {
-    const v = parseInt(checked.value, 10);
+    const v = durations[parseInt(checked.value, 10)];
     return Number.isFinite(v) && v >= 1 && v <= 5 ? v : 5;
   }
-  // fallback for older numeric input
-  const old = document.getElementById("note-duration");
-  if (old && (old.tagName || "").toUpperCase() === "INPUT") {
-    const parsed = parseFloat(old.value);
-    if (Number.isFinite(parsed)) return parsed;
-  }
-  return 5;
+  return 4;
 }
 
 function startLoop() {
