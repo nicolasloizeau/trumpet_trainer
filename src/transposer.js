@@ -63,7 +63,7 @@ function best_octave(score) {
     let min_iy = Math.min(...iys);
     let max_iy = Math.max(...iys);
     let center = (min_iy + max_iy) / 2;
-    let new_cost = Math.abs(center - total_lines);
+    let new_cost = Math.abs(center + 2 - total_lines);
     if (new_cost < cost) {
       cost = new_cost;
       best_shift = oct;
